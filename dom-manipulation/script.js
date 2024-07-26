@@ -30,10 +30,10 @@ function showRandomQuote() {
 
 // Function to add a new quote
 function addQuote() {
-  const creatAddQuoteForm = document.getElementById('creatAddQuoteForm').value;
+  const createAddQuoteForm = document.getElementById('createAddQuoteForm').value;
   const newQuoteCategory = document.getElementById('newQuoteCategory').value;
   
-  if (creatAddQuoteForm && newQuoteCategory) {
+  if (createAddQuoteForm && newQuoteCategory) {
     const newQuote = { text: newQuoteText, category: newQuoteCategory };
     quotes.push(newQuote);
     saveQuotes();

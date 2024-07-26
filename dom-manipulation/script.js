@@ -30,14 +30,14 @@ function showRandomQuote() {
 
 // Function to add a new quote
 function addQuote() {
-  const newQuoteText = document.getElementById('newQuoteText').value;
+  const createAddQuoteForm = document.getElementById('createAddQuoteForm').value;
   const newQuoteCategory = document.getElementById('newQuoteCategory').value;
   
-  if (newQuoteText && newQuoteCategory) {
+  if (createAddQuoteForm && newQuoteCategory) {
     const newQuote = { text: newQuoteText, category: newQuoteCategory };
     quotes.push(newQuote);
     saveQuotes();
-    document.getElementById('newQuoteText').value = '';
+    document.getElementById('createAddQuoteForm').value = '';
     document.getElementById('newQuoteCategory').value = '';
     alert('Quote added successfully!');
   } else {

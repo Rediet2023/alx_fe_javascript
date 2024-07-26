@@ -105,7 +105,7 @@ function importFromJsonFile(event) {
 }
 
 // Function to populate category filter dropdown
-function populateCategoryFilter() {
+function populateCategories() {
   const categoryFilter = document.getElementById('categoryFilter');
   const categories = ['all', ...new Set(quotes.map(quote => quote.category))];
 

@@ -154,3 +154,39 @@ populateCategoryFilter();
 
 // Apply the last selected filter on page load
 filterQuotes();
+
+async function postQuoteToServer(quote) {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: quote.text,
+        body: quote.category
+      })
+    });
+    const data = await response.json();
+    console.log('Quote posted to server:', data);
+  } catch (error) {
+    console.error('Error posting quote to server:', error);
+  }
+}
+
+// Function to periodically sync quotes with the server
+function syncQuotesWithServer() {
+  fetchQuotesFromServer();
+  setInterval(fetchQuotesFromServer, 60000); // Fetch new quotes every minute
+}
+
+// Event listener for the 'Show New Quote' button
+document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+
+// Initial call to display the last viewed quote or a random quote
+showLastViewedQuote();
+
+// Create the add quote form on page load
+createAddQuoteForm();
+
+//

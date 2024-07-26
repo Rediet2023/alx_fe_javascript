@@ -90,3 +90,67 @@ document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 
 // Initial call to display the last viewed quote or a random quote
 showLastViewedQuote();
+
+function importFromJsonFile(event) {
+  const fileReader = new FileReader();
+  fileReader.onload = function(event) {
+    const importedQuotes = JSON.parse(event.target.result);
+    quotes.push(...importedQuotes);
+    saveQuotes();
+    populateCategoryFilter();
+    alert('Quotes imported successfully!');
+    showRandomQuote();
+  };
+  fileReader.readAsText(event.target.files[0]);
+}
+
+// Function to populate category filter dropdown
+function populateCategoryFilter() {
+  const categoryFilter = document.getElementById('categoryFilter');
+  const categories = ['all', ...new Set(quotes.map(quote => quote.category))];
+
+  categoryFilter.innerHTML = '';
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+    categoryFilter.appendChild(option);
+  });
+
+  const selectedCategory = localStorage.getItem('selectedCategory');
+  if (selectedCategory) {
+    categoryFilter.value = selectedCategory;
+  }
+}
+
+// Function to filter quotes based on selected category
+function filterQuotes() {
+  const selectedCategory = document.getElementById('categoryFilter').value;
+  localStorage.setItem('selectedCategory', selectedCategory);
+  const filteredQuotes = selectedCategory === 'all' ? quotes : quotes.filter(quote => quote.category === selectedCategory);
+
+  const quoteDisplay = document.getElementById('quoteDisplay');
+  if (filteredQuotes.length > 0) {
+    const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
+    const randomQuote = filteredQuotes[randomIndex];
+    quoteDisplay.innerHTML = `<p>"${randomQuote.text}" - <em>${randomQuote.category}</em></p>`;
+    sessionStorage.setItem('lastQuote', JSON.stringify(randomQuote));
+  } else {
+    quoteDisplay.innerHTML = `<p>No quotes available in this category.</p>`;
+  }
+}
+
+// Event listener for the 'Show New Quote' button
+document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+
+// Initial call to display the last viewed quote or a random quote
+showLastViewedQuote();
+
+// Create the add quote form on page load
+createAddQuoteForm();
+
+// Populate category filter dropdown on page load
+populateCategoryFilter();
+
+// Apply the last selected filter on page load
+filterQuotes();

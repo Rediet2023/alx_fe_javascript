@@ -180,6 +180,16 @@ function syncQuotesWithServer() {
   setInterval(fetchQuotesFromServer, 60000); // Fetch new quotes every minute
 }
 
+// Function to show notifications
+function showNotification(message) {
+  const notification = document.getElementById('notification');
+  notification.textContent = message;
+  notification.style.display = 'block';
+  setTimeout(() => {
+    notification.style.display = 'none';
+  }, 3000);
+}
+
 // Event listener for the 'Show New Quote' button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 
@@ -189,4 +199,8 @@ showLastViewedQuote();
 // Create the add quote form on page load
 createAddQuoteForm();
 
-//
+// Populate the category filter dropdown on page load
+populateCategoryFilter();
+
+// Start syncing quotes with the server
+syncQuotesWithServer();

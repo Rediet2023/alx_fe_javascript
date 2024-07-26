@@ -181,7 +181,7 @@ function syncQuotesWithServer() {
 }
 
 // Function to show notifications
-function showNotification(message) {
+function Quotessyncedwithserver(message) {
   const notification = document.getElementById('notification');
   notification.textContent = message;
   notification.style.display = 'block';

@@ -177,14 +177,14 @@ async function postQuoteToServer(quote) {
 // Function to periodically sync quotes with the server
 function syncQuotesWithServer() {
   fetchQuotesFromServer();
-  setInterval(Quotessyncedwithserver, 60000); // Fetch new quotes every minute
+  setInterval(fetchQuotesFromServer, 60000); // Fetch new quotes every minute
 }
 
 // Function to show notifications
 function showNotification(message) {
   const notification = document.getElementById('notification');
   notification.textContent = message;
-  notification.style.display = 'block';
+  notification.style.display = "Quotes synced with server!";
   setTimeout(() => {
     notification.style.display = 'none';
   }, 3000);

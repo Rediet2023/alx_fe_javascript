@@ -30,14 +30,14 @@ function showRandomQuote() {
 
 // Function to add a new quote
 function addQuote() {
-  const createAddQuoteForm = document.getElementById('createAddQuoteForm').value;
+  const creatAddQuoteForm = document.getElementById('creatAddQuoteForm').value;
   const newQuoteCategory = document.getElementById('newQuoteCategory').value;
   
-  if (createAddQuoteForm && newQuoteCategory) {
+  if (creatAddQuoteForm && newQuoteCategory) {
     const newQuote = { text: newQuoteText, category: newQuoteCategory };
     quotes.push(newQuote);
     saveQuotes();
-    document.getElementById('createAddQuoteForm').value = '';
+    document.getElementById('creatAddQuoteForm').value = '';
     document.getElementById('newQuoteCategory').value = '';
     alert('Quote added successfully!');
   } else {
@@ -63,10 +63,12 @@ function exportToJsonFile() {
   const dataBlob = new Blob([dataStr], { type: 'application/json' });
   const url = URL.createObjectURL(dataBlob);
 
-  const downloadLink = `<a href="${url}" download="quotes.json" id="downloadLink">Download Quotes</a>`;
-  document.body.insertAdjacentHTML('beforeend', downloadLink);
-  document.getElementById('downloadLink').click();
-  document.getElementById('downloadLink').remove();
+  const downloadLink = document.createElement('a');
+  downloadLink.href = url;
+  downloadLink.download = 'quotes.json';
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
   URL.revokeObjectURL(url);
 }
 
@@ -85,3 +87,6 @@ function importFromJsonFile(event) {
 
 // Event listener for the 'Show New Quote' button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+
+// Initial call to display the last viewed quote or a random quote
+showLastViewedQuote();

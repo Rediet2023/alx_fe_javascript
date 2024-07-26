@@ -13,13 +13,13 @@ function showRandomQuote() {
 }
 
 function addQuote() {
-  const newQuoteText = document.getElementById('newQuoteText').value;
+  const createAddQuoteForm = document.getElementById('createAddQuoteForm').value;
   const newQuoteCategory = document.getElementById('newQuoteCategory').value;
   
-  if (newQuoteText && newQuoteCategory) {
+  if (createAddQuoteForm && newQuoteCategory) {
     const newQuote = { text: newQuoteText, category: newQuoteCategory };
     quotes.push(newQuote);
-    document.getElementById('newQuoteText').value = '';
+    document.getElementById('createAddQuoteForm').value = '';
     document.getElementById('newQuoteCategory').value = '';
     alert('Quote added successfully!');
   } else {
@@ -27,5 +27,5 @@ function addQuote() {
   }
 }
 
-document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+document.getElementById('createAddQuoteForm').addEventListener('click', showRandomQuote);
 showRandomQuote();
